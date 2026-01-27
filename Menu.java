@@ -9,17 +9,20 @@ import java.awt.FlowLayout;
 
 import java.util.ArrayList;
 
+import java.io.*;
+
 public class Menu extends JFrame{
 	private JLabel titulo = new JLabel("Bem-vindo à Roleta de Tarefas!");
 	private JButton adicionar = new JButton("Adicionar Tarefa");
 	private JButton roletar = new JButton("Girar a roleta");
 	private boolean listaExiste = false;
 	private	ArrayList <String> tarefas = new ArrayList<String>();
+	private Arquivo arquivo = new Arquivo();
+ 	
 	public Menu(){
 		super("Roleta de tarefas");
 
 		setLayout( new FlowLayout() );
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(300,300);
 		setVisible(true);
@@ -50,6 +53,7 @@ public class Menu extends JFrame{
 			public void actionPerformed(ActionEvent evento){
 				if (evento.getSource() == roletar){
 					if(listaExiste){
+						arquivo.showListas();
 						Roleta roleta = new Roleta(tarefas);
 						JOptionPane.showMessageDialog(null, String.format("Tarefa escolhida pro dia: %s", roleta.girarRoleta())); 
 					} else {
