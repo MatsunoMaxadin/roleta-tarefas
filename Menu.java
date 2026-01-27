@@ -34,6 +34,7 @@ public class Menu extends JFrame{
 				if(evento.getSource() == adicionar){
 					String op = "s";
 					String tarefa;
+					System.out.print(arquivo.showListas());
 					while(op.equals("s")){
 						tarefa = JOptionPane.showInputDialog("Digite uma tarefa: ");
 						tarefas.add(tarefa);
@@ -53,8 +54,13 @@ public class Menu extends JFrame{
 			public void actionPerformed(ActionEvent evento){
 				if (evento.getSource() == roletar){
 					if(listaExiste){
-						arquivo.showListas();
-						Roleta roleta = new Roleta(tarefas);
+						try {
+						 	tarefas = arquivo.getListaTarefas(1);
+						} catch (IOException e) {
+							System.out.println("Erro: " + e.getMessage());
+						 } 
+						 Roleta roleta = new Roleta(tarefas);
+						 
 						JOptionPane.showMessageDialog(null, String.format("Tarefa escolhida pro dia: %s", roleta.girarRoleta())); 
 					} else {
 						JOptionPane.showMessageDialog(null, "Lista de tarefas não encontrada! Por favor, crie uma.");
