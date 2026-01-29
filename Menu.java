@@ -34,7 +34,6 @@ public class Menu extends JFrame{
 				if(evento.getSource() == adicionar){
 					String op = "s";
 					String tarefa;
-					System.out.print(arquivo.showListas());
 					while(op.equals("s")){
 						tarefa = JOptionPane.showInputDialog("Digite uma tarefa: ");
 						tarefas.add(tarefa);
@@ -53,22 +52,33 @@ public class Menu extends JFrame{
 		roletar.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent evento){
 				if (evento.getSource() == roletar){
-					if(listaExiste){
+					int indice;
+
+					if (arquivo.hasListas()){
+						
+						String StringIndice = JOptionPane.showInputDialog("Listas salvas: " + arquivo.showListas());
+						indice = Integer.parseInt(StringIndice.trim());
+						
 						try {
-						 	tarefas = arquivo.getListaTarefas(1);
+						 	tarefas = arquivo.getListaTarefas(indice);
 						} catch (IOException e) {
 							System.out.println("Erro: " + e.getMessage());
 						 } 
 						 Roleta roleta = new Roleta(tarefas);
 						 
 						JOptionPane.showMessageDialog(null, String.format("Tarefa escolhida pro dia: %s", roleta.girarRoleta())); 
-					} else {
-						JOptionPane.showMessageDialog(null, "Lista de tarefas não encontrada! Por favor, crie uma.");
-					}		
-				}
+					
+						
+						
+				} else {
+					JOptionPane.showMessageDialog(null, "Não existem listas no momento! Por favor, adicione alguma.");
+				
+				} 
 			}
 		
-		});
+		}
+		}
+		);
 
 		add(roletar);
 
