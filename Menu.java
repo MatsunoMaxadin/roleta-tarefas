@@ -15,7 +15,6 @@ public class Menu extends JFrame{
 	private JLabel titulo = new JLabel("Bem-vindo à Roleta de Tarefas!");
 	private JButton adicionar = new JButton("Adicionar Tarefa");
 	private JButton roletar = new JButton("Girar a roleta");
-	private boolean listaExiste = false;
 	private	ArrayList <String> tarefas = new ArrayList<String>();
 	private Arquivo arquivo = new Arquivo();
  	
@@ -40,7 +39,6 @@ public class Menu extends JFrame{
 						op = JOptionPane.showInputDialog("Deseja inserir outra tarefa? (s/n)");
 						
 					}
-					listaExiste = true;
 
 				}
 			}
