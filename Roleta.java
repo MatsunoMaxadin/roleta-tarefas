@@ -12,7 +12,6 @@ public class Roleta{
 		String tarefaEscolhida;
 
 		Random gerador = new Random();
-
 		int indiceTarefa = gerador.nextInt(this.tarefas.size());
 
 		return this.tarefas.get(indiceTarefa);

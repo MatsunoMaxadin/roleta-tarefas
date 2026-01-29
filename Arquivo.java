@@ -1,6 +1,7 @@
 import java.io.*;
 
 import java.util.ArrayList;
+import java.util.Formatter;
 
 import javax.swing.JOptionPane;
 
@@ -62,6 +63,20 @@ public class Arquivo{
 
 		}
 		return this.tarefas;
+	}
+
+	public void createList(ArrayList<String> tarefas, String nomeArquivo) throws FileNotFoundException{
+
+		Formatter novoArquivo = new Formatter("listas/"+nomeArquivo+".txt");
+		String textoArquivo = "";
+
+		for (int i = 0; i < tarefas.size(); i++){
+			textoArquivo+= tarefas.get(i) + "\n";
+		}
+
+		novoArquivo.format(textoArquivo);
+		
+		novoArquivo.close();	
 	}
 	
 

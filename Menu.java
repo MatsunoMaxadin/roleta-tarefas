@@ -15,7 +15,6 @@ public class Menu extends JFrame{
 	private JLabel titulo = new JLabel("Bem-vindo à Roleta de Tarefas!");
 	private JButton adicionar = new JButton("Adicionar Tarefa");
 	private JButton roletar = new JButton("Girar a roleta");
-	private	ArrayList <String> tarefas = new ArrayList<String>();
 	private Arquivo arquivo = new Arquivo();
  	
 	public Menu(){
@@ -33,11 +32,22 @@ public class Menu extends JFrame{
 				if(evento.getSource() == adicionar){
 					String op = "s";
 					String tarefa;
+					String nomeArquivo;
+					ArrayList<String> tarefas = new ArrayList<String>();
+
+					nomeArquivo = JOptionPane.showInputDialog("qual vai ser o nome do novo arquivo?");
+						
 					while(op.equals("s")){
 						tarefa = JOptionPane.showInputDialog("Digite uma tarefa: ");
 						tarefas.add(tarefa);
 						op = JOptionPane.showInputDialog("Deseja inserir outra tarefa? (s/n)");
 						
+					}
+					
+					try {
+					arquivo.createList(tarefas, nomeArquivo);
+					} catch ( FileNotFoundException arquivoInexistente){
+						System.err.println(" arquivo não existe ");
 					}
 
 				}
@@ -56,7 +66,7 @@ public class Menu extends JFrame{
 						
 						String StringIndice = JOptionPane.showInputDialog("Listas salvas: " + arquivo.showListas());
 						indice = Integer.parseInt(StringIndice.trim());
-						
+						ArrayList<String> tarefas = new ArrayList<String>();
 						try {
 						 	tarefas = arquivo.getListaTarefas(indice);
 						} catch (IOException e) {
