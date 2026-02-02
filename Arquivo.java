@@ -43,7 +43,9 @@ public class Arquivo{
 	
 	}
 
-	public ArrayList<String> getListaTarefas(int indice) throws IOException{
+	public ArrayList<String> getListaTarefas(int indice){
+		
+		try {
 		listas = arquivo.list();
 
 		if (indice < 1 || indice > listas.length){
@@ -62,12 +64,20 @@ public class Arquivo{
 
 
 		}
+		} catch (IOException e){
+			System.out.println("Erro: " + e.getMessage());
+		}
 		return this.tarefas;
 	}
 
-	public void createList(ArrayList<String> tarefas, String nomeArquivo) throws FileNotFoundException{
+	public void createList(ArrayList<String> tarefas, String nomeArquivo){
+		
+		try {
+			Formatter novoArquivo = new Formatter("listas/"+nomeArquivo+".txt");
 
-		Formatter novoArquivo = new Formatter("listas/"+nomeArquivo+".txt");
+		
+
+
 		String textoArquivo = "";
 
 		for (int i = 0; i < tarefas.size(); i++){
@@ -77,6 +87,10 @@ public class Arquivo{
 		novoArquivo.format(textoArquivo);
 		
 		novoArquivo.close();	
+
+		} catch (FileNotFoundException e){
+			System.err.print("Arquivo não encontrado");
+		}
 	}
 	
 

@@ -44,11 +44,8 @@ public class Menu extends JFrame{
 						
 					}
 					
-					try {
 					arquivo.createList(tarefas, nomeArquivo);
-					} catch ( FileNotFoundException arquivoInexistente){
-						System.err.println(" arquivo não existe ");
-					}
+					
 
 				}
 			}
@@ -67,11 +64,9 @@ public class Menu extends JFrame{
 						String StringIndice = JOptionPane.showInputDialog("Listas salvas: " + arquivo.showListas());
 						indice = Integer.parseInt(StringIndice.trim());
 						ArrayList<String> tarefas = new ArrayList<String>();
-						try {
-						 	tarefas = arquivo.getListaTarefas(indice);
-						} catch (IOException e) {
-							System.out.println("Erro: " + e.getMessage());
-						 } 
+			
+						tarefas = arquivo.getListaTarefas(indice);
+						
 						 Roleta roleta = new Roleta(tarefas);
 						 
 						JOptionPane.showMessageDialog(null, String.format("Tarefa escolhida pro dia: %s", roleta.girarRoleta())); 
